@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./App.css";
 const Header = () => {
   const handleChangeName = () => {
     const names = ["Khoa", "Hà", "Nguyên"];
@@ -7,9 +7,9 @@ const Header = () => {
     return names[int];
   };
   return (
-    <div>
-      <h1> Heelo: {handleChangeName()}</h1>
-    </div>
+    <header>
+      <h1>Groceries List</h1>
+    </header>
   );
 };
 
