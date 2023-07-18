@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import uuid from "react-uuid";
+
+import "./index.css";
 import Main from "./Main";
 import Sidebar from "./Sidebar";
-import "./index.css";
 function App() {
   const [notes, setNotes] = useState([]);
   const [activeNote, setActiveNote] = useState(false);
-  const onAddNote = () => {
-    const newNote = {
+
+  const onAddNote = (e) => {
+    const newNotes = {
       id: uuid(),
-      title: "Untitled Note",
+      title: "Ultitled Note",
       body: "",
       lastModified: Date.now(),
     };
-    setNotes([newNote, ...notes]);
+    setNotes([newNotes, ...notes]);
+    setActiveNote(newNotes.id);
   };
-
   const onUpdateNote = (updatedNote) => {
     const updatedNotesArray = notes.map((note) => {
       if (note.id === activeNote) {
@@ -23,15 +25,14 @@ function App() {
       }
       return note;
     });
-
     setNotes(updatedNotesArray);
+  };
+  // khi nhấn notes bên sidebar thì main sẽ hiện theo
+  const getActiveNote = () => {
+    return notes.find((note) => note.id === activeNote);
   };
   const onDeleteNote = (idToDelete) => {
     setNotes(notes.filter((note) => note.id !== idToDelete));
-  };
-
-  const getActiveNote = () => {
-    return notes.find((note) => note.id === activeNote);
   };
   return (
     <div className="App">
